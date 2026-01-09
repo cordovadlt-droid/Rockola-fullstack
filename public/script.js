@@ -1,5 +1,5 @@
 // ANTES: const API_URL = "http://localhost:5500/api/canciones";
-const API_URL = "/api/canciones"; // AHORA: Ruta relativa para que funcione en Vercel
+const API_URL = "/api";
 
 // 1. Cargar canciones al iniciar
 async function cargarCanciones() {
