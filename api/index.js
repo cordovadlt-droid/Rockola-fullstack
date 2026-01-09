@@ -1,7 +1,6 @@
 const mysql = require('mysql2');
 
 module.exports = async (req, res) => {
-    // 1. Configuración de conexión
     const connection = mysql.createConnection({
         host: 'mysql-12067d6-cordovadlt-rockola-fullstack2.f.aivencloud.com',
         user: 'avnadmin',
@@ -11,15 +10,11 @@ module.exports = async (req, res) => {
         ssl: { rejectUnauthorized: false }
     });
 
-    // 2. Extraer ID de la URL si existe (ejemplo: /api/5)
-    const urlParts = req.url.split('/');
-    const id = urlParts[urlParts.length - 1] !== 'api' ? urlParts[urlParts.length - 1] : null;
-
     try {
         if (req.method === 'GET') {
             connection.query('SELECT * FROM CANCION', (err, results) => {
                 connection.end();
-                if (err) return res.status(500).json([]); // Devolvemos array vacío si falla
+                if (err) return res.status(200).json([]); // Devolvemos [] para evitar el error de forEach
                 res.status(200).json(results);
             });
         } 
@@ -32,8 +27,7 @@ module.exports = async (req, res) => {
                 res.status(201).json({ id: result.insertId });
             });
         }
-        // ... (puedes agregar DELETE y PATCH después)
-    } catch (error) {
+    } catch (e) {
         if (connection) connection.end();
         res.status(500).json([]);
     }

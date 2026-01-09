@@ -1,6 +1,6 @@
 // ANTES: const API_URL = "http://localhost:5500/api/canciones";
-const API_URL = "/api"; // Sin la palabra 'canciones' al final
-
+// Busca esta línea al principio de public/script.js y déjala exactamente así:
+const API_URL = "/api";
 // 1. Cargar canciones al iniciar
 async function cargarCanciones() {
     try {
